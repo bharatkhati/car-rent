@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "ribriKuSl?pI-Ezi+A21",
+    "database": "rentcar",
+    "host": "kognics-us-db.cluster-cl0ykq8iwu1h.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "admin",
+    "password": "ribriKuSl?pI-Ezi+A21",
+    "database": "rentcar",
+    "host": "kognics-us-db.cluster-cl0ykq8iwu1h.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "production": {
+     "username": "admin",
+    "password": "ribriKuSl?pI-Ezi+A21",
+    "database": "rentcar",
+    "host": "kognics-us-db.cluster-cl0ykq8iwu1h.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}
