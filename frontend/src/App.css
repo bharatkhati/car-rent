@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.form-main-wrapper {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+}

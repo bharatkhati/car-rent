@@ -9,24 +9,51 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Booking.belongsTo(models.Vehicle, {
+        foreignKey: "vehicleId",
+        as: "Vehicle",
+      });
     }
   }
   Booking.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      vehicleId: DataTypes.INTEGER,
-      startDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      vehicleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Vehicles",
+          key: "id",
+        },
+      },
+      startDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      endDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          isAfterStartDate(value) {
+            if (value <= this.startDate) {
+              throw new Error("End date must be after start date");
+            }
+          },
+        },
+      },
     },
     {
       sequelize,
       modelName: "Booking",
+      tableName: "Bookings",
     }
   );
   return Booking;
-};
-
-Booking.associate = function (models) {
-  Booking.belongsTo(models.Vehicle, { foreignKey: "vehicleId" });
 };

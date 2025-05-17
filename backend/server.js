@@ -1,16 +1,20 @@
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
+const app = require("./app");
+const { sequelize } = require("./models");
 
-const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Test database connection and sync models
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database connection established successfully.");
+    return sequelize.sync(); // { force: true } for development to reset db
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
